@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ModSecurity</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Панель управления ModSecurity</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/groups">Группы правил</a></li>
+            <li><a href="/parser">Анализ журнала аудита</a></li>
+        </ul>
+    </nav>
+    <h2>Выбор категорий правил</h2>
+    <form method="post" action="/groups">
+        <label><input type="checkbox" {{ group2_checked }} name="REQUEST-910-IP-REPUTATION">REQUEST-910-IP-REPUTATION</label>
+        <p>Эти правила касаются обнаружения трафика с IP-адресов, которые ранее были связаны с вредоносной активностью, будь то на нашем локальном сайте или по всему миру.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group3_checked }}
+            name="REQUEST-911-METHOD-ENFORCEMENT">REQUEST-911-METHOD-ENFORCEMENT</label>
+        <p>Методы блокировки (PUT, PATCH).</p>
+        <p>Рекомендуется включать, если сервер не использует PUT или PATCH методы</p>
+        <label><input type="checkbox" {{ group4_checked }} name="REQUEST-912-DOS-PROTECTION">REQUEST-912-DOS-PROTECTION</label>
+        <p>Правила в этом файле будут пытаться обнаружить некоторые DoS-атаки 7-го уровня (отказ в обслуживании) на ваш сервер.</p>
+        <p>Рекомендуется включать, если есть опасения DOS-атак</p>
+        <label><input type="checkbox" {{ group5_checked }}
+            name="REQUEST-913-SCANNER-DETECTION">REQUEST-913-SCANNER-DETECTION</label>
+        <p>Эти правила сосредоточены вокруг защиты от сканеров портов и окружения.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group6_checked }}
+            name="REQUEST-920-PROTOCOL-ENFORCEMENT">REQUEST-920-PROTOCOL-ENFORCEMENT</label>
+        <p>Правила в этом файле сосредоточены вокруг обнаружения запросов, которые либо нарушают протокол HTTP, либо представляют собой запрос, который не сгенерировал бы ни один современный браузер, например, отсутствует пользовательский агент.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group7_checked }} name="REQUEST-921-PROTOCOL-ATTACK">REQUEST-921-PROTOCOL-ATTACK</label>
+        <p>Защита от внедрения заголовка, несанкционированных запросов и разделения ответа</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group8_checked }}
+            name="REQUEST-930-APPLICATION-ATTACK-LFI">REQUEST-930-APPLICATION-ATTACK-LFI</label>
+        <p>Эти правила пытаются определить, когда пользователь пытается включить файл, который был бы локальным для веб-сервера, к которому у него не должно быть доступа.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group9_checked }}
+            name="REQUEST-931-APPLICATION-ATTACK-RFI">REQUEST-931-APPLICATION-ATTACK-RFI</label>
+        <p>Эти правила пытаются определить, когда пользователь пытается включить удаленный файл в веб-приложение.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group10_checked }}
+            name="REQUEST-932-APPLICATION-ATTACK-RCE">REQUEST-932-APPLICATION-ATTACK-RCE</label>
+        <p>Эти правила пытаются определить, когда пользователь пытается совершить удаленное выполнение кода в веб-приложение.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group11_checked }}
+            name="REQUEST-933-APPLICATION-ATTACK-PHP">REQUEST-933-APPLICATION-ATTACK-PHP</label>
+        <p>Защита от атака использующих внедрение кода PHP.</p>
+        <p>Можно выключить, если сервер не использует PHP</p>
+        <label><input type="checkbox" {{ group12_checked }}
+            name="REQUEST-934-APPLICATION-ATTACK-NODEJS">REQUEST-934-APPLICATION-ATTACK-NODEJS</label>
+        <p>Защита от атак использующих уязвимости NodeJS.</p>
+        <p>Можно выключить, если сервер не использует NodeJS</p>
+        <label><input type="checkbox" {{ group13_checked }}
+            name="REQUEST-941-APPLICATION-ATTACK-XSS">REQUEST-941-APPLICATION-ATTACK-XSS</label>
+        <p>Защита от атак с использованием межсайтингово скриптинга.</p>
+        <p>Рекомендуется включать всегда</p>
+        <label><input type="checkbox" {{ group14_checked }}
+            name="REQUEST-942-APPLICATION-ATTACK-SQLI">REQUEST-942-APPLICATION-ATTACK-SQLI</label>
+        <p>В этом конфигурационном файле правила, которые защищают от атак с использованием SQL-инъекций.</p>
+        <p>Можно выключить, если сервер не использует базы данных и SQL</p>
+        <label><input type="checkbox" {{ group15_checked }}
+            name="REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION">REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION</label>
+        <p>Эти правила направлены на обеспечение защиты от атак с фиксацией сеанса.</p>
+        <p>Рекомендуется включать, если на сайте есть разграничение по ролям (администратор, пользователь, гость и т.д.)</p>
+        <label><input type="checkbox" {{ group16_checked }}
+            name="REQUEST-944-APPLICATION-ATTACK-JAVA">REQUEST-944-APPLICATION-ATTACK-JAVA</label>
+        <p>Защита от атак использующих Java.</p>
+        <p>Можно выключить, если сервер не использует Java</p>
+        <p><input type="submit" value="Применить"></p>
+    </form>
+    <style>
+        h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 10px;
+        }
+        h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        }
+        h3 {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        nav {
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin-top: 20px;
+        }
+        ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        }
+        li {
+        margin-right: 20px;
+        }
+        a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        }
+        a:hover {
+        background-color: #007bff;
+        color: #fff;
+        }
+        form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 15px;
+        }
+        label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 5px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        p {
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+        input[type="submit"]:hover {
+        background-color: #0069d9;
+        }
+    </style>
+</body>
+
+</html>

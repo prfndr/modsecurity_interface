@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ModSecurity</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Панель управления ModSecurity</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/groups">Группы правил</a></li>
+            <li><a href="/parser">Анализ журнала аудита</a></li>
+        </ul>
+    </nav>
+    <h2>Анализ журнала аудита ModSecurity</h2>
+    <form method="post" action="/parser">
+        <label><input type="submit" name="pars" value="Analysis">Провести анализ</label>
+        <h3>
+            <p>При нажатие на кнопку "Analysis" производится анализ журнала аудита ModSecurity, анализируются все события до текущего момента.</p>
+            <p>Он представляется в виде:</p>
+            <p>- файл .json,</p>
+            <p>- отчет в формате .xlsx,</p>
+            <p>- .png формат с графиками.</p>
+            <p>Для этих файлов создается подпапка по пути журнала аудита ModSecurity (по умолчанию /var/log/).</p>
+        </h3>
+        <label><input type="submit" name="show" value="Show">Показать анализ</label>
+        <h3>
+            <p>При нажатие на кнопку "Show" открывается последний созданный .xslx файл состоящий из двух страниц:</p>
+            <p>- таблица, в которой каждое событие разбивается на его составные части по соответствующим колонкам,
+            <p>- графики для визуализации статистики.</p>
+            <p>Графики включают в себя:</p>
+            <p>- временную шкалу с количеством заблокированных и пропущенных событий,</p>
+            <p>- круговую диаграмму с процентным соотношением входящих IP адресов,</p>
+            <p>- круговую диаграмму с процентным соотношением атак набравшие определенное количество очков аномалии,</p>
+            <p>- круговую диаграмму с процентным соотношением частоты срабатывания определенного правила.</p>
+        </h3>
+    </form>
+    <style>
+       h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 10px;
+        }
+        h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        }
+        h3 {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        nav {
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin-top: 20px;
+        }
+        ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        }
+        li {
+        margin-right: 20px;
+        }
+        a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        }
+        a:hover {
+        background-color: #007bff;
+        color: #fff;
+        }
+        form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 15px;
+        }
+        label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 5px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        p {
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+        input[type="submit"]:hover {
+        background-color: #0069d9;
+        }
+    </style>
+</body>
+
+</html>

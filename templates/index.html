@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ModSecurity</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Панель управления ModSecurity</h1>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/groups">Группы правил</a></li>
+            <li><a href="/parser">Анализ журнала аудита</a></li>
+        </ul>
+    </nav>
+    <h2>Режим активной защиты ModSecurity</h2>
+    <h3>
+        <p>Во включеном режиме ModSecurity блокирует входящий вредоносный трафик, фильтруя его с помощью правил OWASP-CRS. </p>
+        <p>При выключеном состояниии ModSecurity продолжает фильтровать трафик, но никаких действий по блокировке не предпринимает. </p>
+    </h3>
+    <form method="post" action="/">
+        {% if state == 'on' %}
+        <label><input type="radio" name="action" value="on" checked> Включить</label>
+        <label><input type="radio" name="action" value="off"> Выключить</label>
+        {% else %}
+        <label><input type="radio" name="action" value="on"> Включить</label>
+        <label><input type="radio" name="action" value="off" checked> Выключить</label>
+        {% endif %}
+        <p><input type="submit" value="Применить"></p>
+    </form>
+    <h2>Выбор уровня защищенности</h2>
+    <h3>
+        Изменение уровня защищенности "OWASP-CRS Paranoia Levels" представляет собой добавление более жестких правил фильтрации с каждым повышением уровня начиная с 1-го до 4-го.
+    </h3>
+    <form method="post" action="/">
+        <label><input type="radio" name="SelectPL" value="PL1" {{ paranoia1_checked }}>Paranoia Level 1 </label>
+        <label><input type="radio" name="SelectPL" value="PL2" {{ paranoia2_checked }}>Paranoia Level 2 </label>
+        <label><input type="radio" name="SelectPL" value="PL3" {{ paranoia3_checked }}>Paranoia Level 3 </label>
+        <label><input type="radio" name="SelectPL" value="PL4" {{ paranoia4_checked }}>Paranoia Level 4 </label>
+        <input type="submit" value="Применить">
+    </form>
+    <h3>
+        <p>Описание четырех уровней паранойи:</p>
+        <p>1 - Базовая безопасность с минимальной потребностью в устранении ложных срабатываний. Эти правила для всех, у кого есть HTTP-сервер в Интернете. (Уровень по умолчанию) </p>
+        <p>2 - Правила, которые адекватны, когда речь идет о реальных пользовательских данных. Возможно, готовый интернет-магазин. (Рекомендованный уровень для большинства пользователей) </p>
+        <p>3 - Уровень безопасности онлайн-банкинга.</p>
+        <p>4 - Правила, которые настолько сильны, что для их использования важно научиться писать исключения из правил. (Рекомендуется использовать только опытным пользователяем) </p>
+    </h3>
+    <style>
+        h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-top: 10px;
+        }
+        h2 {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        }
+        h3 {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        nav {
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin-top: 20px;
+        }
+        ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        }
+        li {
+        margin-right: 20px;
+        }
+        a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        }
+        a:hover {
+        background-color: #007bff;
+        color: #fff;
+        }
+        form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 15px;
+        }
+        label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 15px;
+        margin-left: 16px;
+        margin-right: 16px;
+        }
+        input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+        input[type="submit"]:hover {
+        background-color: #0069d9;
+        }
+    </style>
+</body>
+
+</html>
